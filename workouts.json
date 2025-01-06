@@ -1,0 +1,114 @@
+{
+    "days": [
+      {
+        "title": "Day 1: Chest & Triceps",
+        "exercises": [
+          {
+            "name": "Bench Press",
+            "sets": "4 x 6–8",
+            "rest": "90 sec",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+          },
+          {
+            "name": "Incline Dumbbell Press",
+            "sets": "3 x 8–10",
+            "rest": "60–90 sec"
+          }
+        ]
+      },
+      {
+        "title": "Day 2: Back & Biceps",
+        "exercises": [
+          {
+            "name": "Deadlift",
+            "sets": "4 x 5–6",
+            "rest": "2 min",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+
+          },
+          {
+            "name": "Pull-Ups",
+            "sets": "3 x Max Reps",
+            "rest": "90 sec"
+          }
+        ]
+      },
+      {
+        "title": "Day 3: Legs",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": "4 x 6–8",
+            "rest": "2 min",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+
+          },
+          {
+            "name": "Lunges",
+            "sets": "3 x 10 (per leg)",
+            "rest": "90 sec"
+          }
+        ]
+      },
+      {
+        "title": "Day 4: Shoulders",
+        "exercises": [
+          {
+            "name": "Overhead Press",
+            "sets": "4 x 6–8",
+            "rest": "90 sec",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+          },
+          {
+            "name": "Side Lateral Raise",
+            "sets": "3 x 10–12",
+            "rest": "60 sec"
+          }
+        ]
+      },
+      {
+        "title": "Day 5: Full-Body Conditioning",
+        "exercises": [
+          {
+            "name": "Burpees",
+            "sets": "3 x 15",
+            "rest": "60 sec",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+          },
+          {
+            "name": "Kettlebell Swings",
+            "sets": "3 x 12",
+            "rest": "60 sec"
+          }
+        ]
+      },
+      {
+        "title": "Day 6: Core & Cardio",
+        "exercises": [
+          {
+            "name": "Plank",
+            "sets": "3 x 60 sec",
+            "rest": "30 sec",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+          },
+          {
+            "name": "Mountain Climbers",
+            "sets": "3 x 20 (each leg)",
+            "rest": "60 sec"
+          }
+        ]
+      },
+      {
+        "title": "Day 7: Rest/Active Recovery",
+        "exercises": [
+          {
+            "name": "Light Yoga or Stretching",
+            "sets": "20–30 min",
+            "rest": "N/A",
+            "url": "https://www.muscleandstrength.com/exercises/barbell-bench-press.html"
+
+          }
+        ]
+      }
+    ]
+  }
