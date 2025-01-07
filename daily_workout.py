@@ -112,8 +112,8 @@ def get_today_workout(days_list):
     if today_index < len(days_list):
         selected_workout_title = days_list[today_index].get(
             'title', 'No Title')
-        # logging.info(f"Selected workout for index {
-        #              today_index}: {selected_workout_title}")
+        logging.info(f"Selected workout for index {
+                     today_index}: {selected_workout_title}")
         return days_list[today_index]
     else:
         logging.error("Today's workout index is out of range.")
@@ -125,8 +125,8 @@ def get_today_workout(days_list):
 
 
 def send_email(subject, html_body, smtp_server, smtp_port, email_address, email_password, recipient_email):
-    logging.info(f"Preparing to send email to {
-                 recipient_email} with subject '{subject}'")
+    # logging.info(f"Preparing to send email to {
+    #              recipient_email} with subject '{subject}'")
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = email_address
