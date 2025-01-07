@@ -110,8 +110,10 @@ def get_today_workout(days_list):
     today_index = datetime.utcnow().weekday()  # Monday=0, Sunday=6
     logging.info(f"Today's index (UTC): {today_index}")
     if today_index < len(days_list):
-        logging.info(f"Selected workout for index {today_index}: {
-                     days_list[today_index].get('title', 'No Title')}")
+        selected_workout_title = days_list[today_index].get(
+            'title', 'No Title')
+        logging.info(f"Selected workout for index {
+                     today_index}: {selected_workout_title}")
         return days_list[today_index]
     else:
         logging.error("Today's workout index is out of range.")
@@ -132,11 +134,12 @@ def send_email(subject, html_body, smtp_server, smtp_port, email_address, email_
     msg.attach(MIMEText(html_body, "html"))
 
     try:
+        logging.info(f"Connecting to SMTP server: {smtp_server}:{smtp_port}")
         with smtplib.SMTP(smtp_server, int(smtp_port)) as server:
-            logging.info(f"Connecting to SMTP server: {
-                         smtp_server}:{smtp_port}")
             server.starttls()
+            logging.info("Logging into SMTP server")
             server.login(email_address, email_password)
+            logging.info("Sending email")
             server.sendmail(email_address, recipient_email, msg.as_string())
         logging.info(f"Email sent successfully to {recipient_email}.")
     except smtplib.SMTPException as smtp_err:
