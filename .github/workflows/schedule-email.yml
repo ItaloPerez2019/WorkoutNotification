@@ -22,9 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          # If your script requires additional packages, install them here
-          # For example:
-          # pip install requests
+          pip install python-dotenv  # If needed
 
       - name: Run Python script
         env:
