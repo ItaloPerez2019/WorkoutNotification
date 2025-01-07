@@ -112,8 +112,8 @@ def get_today_workout(days_list):
     if today_index < len(days_list):
         selected_workout_title = days_list[today_index].get(
             'title', 'No Title')
-        logging.info(f"Selected workout for index {
-                     today_index}: {selected_workout_title}")
+        # logging.info(f"Selected workout for index {
+        #              today_index}: {selected_workout_title}")
         return days_list[today_index]
     else:
         logging.error("Today's workout index is out of range.")
