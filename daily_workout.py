@@ -20,6 +20,7 @@ logging.basicConfig(
 
 
 def load_workouts(json_path):
+    logging.info(f"Loading workouts from {json_path}")
     try:
         with open(json_path, "r") as f:
             workout_data = json.load(f)
@@ -27,6 +28,7 @@ def load_workouts(json_path):
         if not days:
             logging.error("No workouts found in the JSON file.")
             exit(1)
+        logging.info(f"Loaded {len(days)} days of workouts.")
         return days
     except FileNotFoundError:
         logging.error(f"JSON file not found at {json_path}.")
@@ -43,6 +45,8 @@ def load_workouts(json_path):
 def build_workout_html(day_info):
     title = day_info.get("title", "Workout")
     exercises = day_info.get("exercises", [])
+
+    logging.info(f"Building HTML for: {title}")
 
     html_content = f"""\
     <html>
@@ -104,7 +108,10 @@ def build_workout_html(day_info):
 
 def get_today_workout(days_list):
     today_index = datetime.utcnow().weekday()  # Monday=0, Sunday=6
+    logging.info(f"Today's index (UTC): {today_index}")
     if today_index < len(days_list):
+        logging.info(f"Selected workout for index {today_index}: {
+                     days_list[today_index].get('title', 'No Title')}")
         return days_list[today_index]
     else:
         logging.error("Today's workout index is out of range.")
@@ -116,6 +123,8 @@ def get_today_workout(days_list):
 
 
 def send_email(subject, html_body, smtp_server, smtp_port, email_address, email_password, recipient_email):
+    logging.info(f"Preparing to send email to {
+                 recipient_email} with subject '{subject}'")
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = email_address
@@ -124,6 +133,8 @@ def send_email(subject, html_body, smtp_server, smtp_port, email_address, email_
 
     try:
         with smtplib.SMTP(smtp_server, int(smtp_port)) as server:
+            logging.info(f"Connecting to SMTP server: {
+                         smtp_server}:{smtp_port}")
             server.starttls()
             server.login(email_address, email_password)
             server.sendmail(email_address, recipient_email, msg.as_string())
