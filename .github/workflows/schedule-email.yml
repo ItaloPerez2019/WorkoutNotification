@@ -1,0 +1,35 @@
+name: Send Daily Workout Email
+
+on:
+  schedule:
+    # Runs daily at 11:00 UTC (6:00 AM EST)
+    - cron: "0 11 * * *"
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9" # Specify your Python version
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install python-dotenv  # If your script uses it; otherwise, omit
+
+      - name: Run Python script
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: |
+          python daily_workout.py

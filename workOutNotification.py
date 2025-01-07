@@ -1,13 +1,23 @@
+# import os
+# import json
+# import time
+# import logging
+# import smtplib
+# import schedule
+# import datetime
+# from dotenv import load_dotenv
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
+
 import os
-import json
-import time
-import logging
 import smtplib
-import schedule
-import datetime
-from dotenv import load_dotenv
+import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from datetime import datetime
+import pytz  # Install with pip install pytz
+
+logging.basicConfig(level=logging.INFO)
 
 # ------------------------------------------------------------------------------
 # 1. Configure Logging
@@ -58,6 +68,7 @@ try:
 except ValueError:
     logging.error(f"Invalid SMTP_PORT value: {SMTP_PORT}")
     exit(1)
+
 
 # ------------------------------------------------------------------------------
 # 3. Load Workouts JSON
@@ -219,5 +230,36 @@ def main():
     # send_daily_workout()
 
 
+def send_email():
+    smtp_server = os.getenv("SMTP_SERVER")
+    smtp_port = os.getenv("SMTP_PORT")
+    email_address = os.getenv("EMAIL_ADDRESS")
+    email_password = os.getenv("EMAIL_PASSWORD")
+    recipient_email = os.getenv("RECIPIENT_EMAIL")
+
+    subject = "Daily Workout"
+    body = "Here is your workout for the day!"
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = email_address
+    msg["To"] = recipient_email
+    msg.attach(MIMEText(body, "plain"))
+
+    try:
+        with smtplib.SMTP(smtp_server, int(smtp_port)) as server:
+            server.starttls()
+            server.login(email_address, email_password)
+            server.sendmail(email_address, recipient_email, msg.as_string())
+        logging.info(f"Email sent to {recipient_email}")
+    except Exception as e:
+        logging.error(f"Error sending email: {e}")
+
+
 if __name__ == "__main__":
-    main()
+    # Get current time in EST/EDT
+    eastern = pytz.timezone('US/Eastern')
+    now = datetime.now(eastern)
+    logging.info(f"Current Eastern Time: {now.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    send_email()
